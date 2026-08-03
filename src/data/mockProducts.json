@@ -1,0 +1,56 @@
+[
+  {
+    "id": "prod-1",
+    "name": "Nước mắm Nam Ngư 750ml",
+    "price": 42000,
+    "originalPrice": 45000,
+    "image": "/images/nam_ngu_fish_sauce_1785742459888.png",
+    "category": "Gia vị",
+    "description": "Nước mắm Nam Ngư cá cơm tươi ngon, đậm đà hương vị Việt."
+  },
+  {
+    "id": "prod-2",
+    "name": "Mì Hảo Hảo Tôm Chua Cay (Thùng 30 gói)",
+    "price": 115000,
+    "originalPrice": 125000,
+    "image": "/images/hao_hao_noodles_1785742468948.png",
+    "category": "Mì ăn liền",
+    "description": "Mì Hảo Hảo vị tôm chua cay quen thuộc, thơm ngon khó cưỡng."
+  },
+  {
+    "id": "prod-3",
+    "name": "Cà phê Việt Nam Premium (Hộp 18 gói)",
+    "price": 165000,
+    "originalPrice": 180000,
+    "image": "/images/premium_vietnamese_coffee_1785741831980.png",
+    "category": "Đồ uống",
+    "description": "Cà phê hòa tan Premium đậm vị cà phê rang xay đích thực."
+  },
+  {
+    "id": "prod-4",
+    "name": "Cải Chíp Hữu Cơ Farm Chuẩn Sạch (500g)",
+    "price": 25000,
+    "originalPrice": 30000,
+    "image": "/images/fresh_organic_tomatoes_1785741816028.png",
+    "category": "Rau củ",
+    "description": "Cải chíp và cà chua hữu cơ tươi ngon, đạt chuẩn VietGAP."
+  },
+  {
+    "id": "prod-5",
+    "name": "Cá Hồi Na Uy Tươi Ngon (300g)",
+    "price": 180000,
+    "originalPrice": 200000,
+    "image": "/images/fresh_salmon_1785741952594.png",
+    "category": "Thịt cá",
+    "description": "Cá hồi nhập khẩu trực tiếp từ Na Uy, giàu Omega 3."
+  },
+  {
+    "id": "prod-6",
+    "name": "Thịt Bò Mỹ Nhập Khẩu Thượng Hạng (500g)",
+    "price": 250000,
+    "originalPrice": 300000,
+    "image": "/images/premium_beef_1785741941389.png",
+    "category": "Thịt cá",
+    "description": "Thịt bò cắt lát mỏng mềm ngọt, hoàn hảo cho món lẩu và nướng."
+  }
+]
