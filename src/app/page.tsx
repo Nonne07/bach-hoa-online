@@ -202,12 +202,12 @@ export default function Home() {
 
       {/* 4. PREMIUM PRODUCTS GRID */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-end mb-16">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
           <div>
             <span className="text-brand-600 font-bold tracking-widest uppercase text-sm mb-4 block">Bán Chạy Nhất</span>
-            <h2 className="text-5xl font-extrabold text-slate-900 tracking-tight">Lựa Chọn Hoàn Hảo</h2>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">Lựa Chọn Hoàn Hảo</h2>
           </div>
-          <Link href="/shop" className="hidden md:flex items-center px-6 py-3 bg-slate-900 text-white rounded-full font-bold hover:bg-brand-600 transition-colors shadow-xl">
+          <Link href="/shop" className="inline-flex items-center px-6 py-3 bg-slate-900 text-white rounded-full font-bold hover:bg-brand-600 transition-colors shadow-xl">
             Xem Tất Cả <ArrowRight className="ml-2 w-5 h-5" />
           </Link>
         </div>

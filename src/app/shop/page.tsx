@@ -30,11 +30,11 @@ function ShopContent() {
   }, [searchQuery, categoryQuery]);
 
   return (
-    <div className="pt-32 pb-24 bg-slate-50 min-h-screen">
+    <div className="pt-40 md:pt-48 pb-24 bg-slate-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Premium Header */}
-        <div className="mb-12 bg-gradient-to-r from-emerald-900 to-teal-800 rounded-3xl p-10 md:p-16 flex flex-col items-center text-center shadow-2xl shadow-emerald-900/20 relative overflow-hidden">
+        <div className="mb-12 mt-4 bg-gradient-to-r from-emerald-900 to-teal-800 rounded-3xl p-10 md:p-16 flex flex-col items-center text-center shadow-2xl shadow-emerald-900/20 relative overflow-hidden">
           <div className="absolute inset-0 bg-[url('/images/hero_banner_fresh.png')] opacity-10 bg-cover bg-center mix-blend-overlay"></div>
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4 relative z-10 tracking-tight">Cửa Hàng Thực Phẩm Sạch</h1>
           <p className="text-emerald-100/80 max-w-2xl text-lg relative z-10">Khám phá hàng ngàn sản phẩm hữu cơ tươi ngon được thu hoạch và bảo quản với tiêu chuẩn khắt khe nhất.</p>
