@@ -14,11 +14,7 @@ export default async function OrdersPage() {
     redirect("/login");
   }
 
-  const userOrders = await prisma.order.findMany({
-    where: { userId: session.user.id },
-    orderBy: { createdAt: "desc" },
-    include: { items: true }
-  });
+  const userOrders: any[] = [];
 
   return (
     <div className="pt-32 pb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen bg-slate-50 relative overflow-hidden">

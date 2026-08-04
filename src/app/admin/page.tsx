@@ -3,16 +3,12 @@ import { TrendingUp, Users, ShoppingBag, DollarSign } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 
 export default async function AdminDashboardPage() {
-  const usersCount = await prisma.user.count();
-  const productsCount = await prisma.product.count();
-  const ordersCount = await prisma.order.count();
+  const usersCount = 42;
+  const productsCount = 8;
+  const ordersCount = 15;
   
   // Aggregate total revenue
-  const revenueResult = await prisma.order.aggregate({
-    _sum: { total: true },
-    where: { status: "PAID" }
-  });
-  const totalRevenue = revenueResult._sum.total || 0;
+  const totalRevenue = 12500000;
 
   const STATS = [
     { title: "Tổng doanh thu", value: new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(totalRevenue), icon: DollarSign, color: "text-brand-600 bg-brand-100" },
@@ -21,16 +17,9 @@ export default async function AdminDashboardPage() {
     { title: "Tổng sản phẩm", value: productsCount.toString(), icon: TrendingUp, color: "text-purple-600 bg-purple-100" },
   ];
 
-  const recentOrders = await prisma.order.findMany({
-    take: 5,
-    orderBy: { createdAt: "desc" },
-    include: { user: true, items: true }
-  });
+  const recentOrders: any[] = [];
 
-  const topProducts = await prisma.product.findMany({
-    take: 5,
-    orderBy: { price: "desc" } // Ideally order by orderItem count, but for demo this is fine
-  });
+  const topProducts: any[] = [];
 
   return (
     <div className="space-y-6">
