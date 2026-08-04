@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import mockProducts from "@/data/mockProducts.json";
 
 export async function GET(
   request: Request,
@@ -7,11 +8,19 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    const product = await prisma.product.findUnique({
-      where: {
-        id,
-      },
-    });
+    let product: any = null;
+
+    try {
+      product = await prisma.product.findUnique({
+        where: { id },
+      });
+    } catch (e) {
+      console.warn("Prisma error (likely Vercel SQLite issue), using fallback mock data");
+    }
+
+    if (!product) {
+      product = mockProducts.find(p => p.id === id);
+    }
 
     if (!product) {
       return NextResponse.json(
