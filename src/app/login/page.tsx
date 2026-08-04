@@ -122,24 +122,28 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <div className="min-h-[80vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-slate-50">
-      <div className="max-w-md w-full space-y-8 bg-white p-8 sm:p-10 rounded-3xl shadow-xl border border-slate-100">
+    <div className="min-h-screen pt-32 pb-24 flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-slate-50 relative overflow-hidden">
+      {/* Background decorations */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-brand-400/20 rounded-full blur-[100px] -z-10 pointer-events-none animate-pulse"></div>
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-400/20 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
+      
+      <div className="max-w-md w-full space-y-8 bg-white/80 backdrop-blur-xl p-8 sm:p-12 rounded-[2.5rem] shadow-2xl shadow-slate-200/50 border border-white relative z-10 hover:shadow-brand-500/10 transition-shadow duration-500">
         <div className="text-center">
-          <div className="mx-auto bg-brand-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-4">
-            <Leaf className="w-8 h-8 text-white" />
+          <div className="mx-auto bg-gradient-to-br from-brand-400 to-brand-600 w-20 h-20 rounded-3xl flex items-center justify-center mb-6 shadow-lg shadow-brand-500/30 transform hover:scale-110 hover:rotate-[15deg] transition-all duration-500">
+            <Leaf className="w-10 h-10 text-white" />
           </div>
-          <h2 className="text-3xl font-extrabold text-slate-900">
+          <h2 className="text-4xl font-extrabold text-slate-900 tracking-tight">
             Đăng nhập
           </h2>
-          <p className="mt-2 text-sm text-slate-600">
+          <p className="mt-3 text-base text-slate-600">
             Chưa có tài khoản?{" "}
-            <Link href="/register" className="font-medium text-brand-600 hover:text-brand-500">
+            <Link href="/register" className="font-bold text-brand-600 hover:text-brand-700 transition-colors underline underline-offset-4">
               Đăng ký ngay
             </Link>
           </p>
         </div>
 
-        <Suspense fallback={<div className="text-center py-4">Đang tải...</div>}>
+        <Suspense fallback={<div className="text-center py-4 text-brand-500 font-medium">Đang tải...</div>}>
           <LoginForm />
         </Suspense>
       </div>

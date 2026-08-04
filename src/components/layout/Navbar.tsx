@@ -29,19 +29,20 @@ export function Navbar() {
   const totalItems = useCartStore((state) => state.getTotalItems());
 
   useEffect(() => {
-    setMounted(true);
+    const timer = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full glass shadow-sm transition-all duration-500 border-b border-white/20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-[5.5rem]">
+    <div className="fixed top-0 inset-x-0 z-50 flex justify-center mt-6 px-4 transition-all duration-500">
+      <header className="w-full max-w-5xl glass shadow-2xl shadow-brand-900/10 rounded-full border border-white/40 px-4 transition-all duration-500">
+        <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="bg-gradient-to-br from-brand-400 to-brand-600 p-2.5 rounded-2xl group-hover:scale-105 group-hover:rotate-3 transition-transform duration-300 shadow-md shadow-brand-500/20">
-              <Leaf className="w-6 h-6 text-white" />
+          <Link href="/" className="flex items-center gap-2 group ml-2">
+            <div className="bg-gradient-to-br from-brand-400 to-brand-600 p-2 rounded-xl group-hover:scale-110 group-hover:rotate-[15deg] transition-all duration-500 shadow-lg shadow-brand-500/30">
+              <Leaf className="w-5 h-5 text-white" />
             </div>
-            <span className="font-bold text-2xl text-slate-900 tracking-tight">
+            <span className="font-extrabold text-xl text-slate-900 tracking-tight">
               Bách Hóa <span className="text-brand-500">Online</span>
             </span>
           </Link>
@@ -103,16 +104,21 @@ export function Navbar() {
               </Link>
             )}
             
-            <Link href="/cart">
-              <Button variant="primary" className="rounded-full w-10 h-10 p-0 flex items-center justify-center relative">
-                <ShoppingCart className="w-5 h-5" />
-                {mounted && totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
-                    {totalItems}
-                  </span>
-                )}
-              </Button>
-            </Link>
+            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+              <Link href="/cart">
+                <Button variant="primary" className="rounded-full w-10 h-10 p-0 flex items-center justify-center relative shadow-lg shadow-brand-500/30">
+                  <ShoppingCart className="w-5 h-5" />
+                  {mounted && totalItems > 0 && (
+                    <motion.span 
+                      initial={{ scale: 0 }} animate={{ scale: 1 }}
+                      className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full border border-white"
+                    >
+                      {totalItems}
+                    </motion.span>
+                  )}
+                </Button>
+              </Link>
+            </motion.div>
 
             {/* Mobile Menu Toggle */}
             <Button
@@ -124,41 +130,41 @@ export function Navbar() {
             </Button>
           </div>
         </div>
-      </div>
-
-      {/* Mobile Navigation */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-slate-100 bg-white"
-          >
-            <div className="px-4 py-6 space-y-4">
-              <div className="relative mb-6">
-                <input
-                  type="text"
-                  placeholder="Tìm kiếm..."
-                  className="w-full pl-10 pr-4 py-3 bg-slate-100 border-transparent rounded-xl focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all outline-none"
-                />
-                <Search className="w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+        
+        {/* Mobile Navigation */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden border-t border-slate-100/20 bg-white/80 backdrop-blur-md rounded-b-3xl mt-2"
+            >
+              <div className="px-4 py-6 space-y-4">
+                <div className="relative mb-6">
+                  <input
+                    type="text"
+                    placeholder="Tìm kiếm..."
+                    className="w-full pl-10 pr-4 py-3 bg-slate-100/50 border-transparent rounded-xl focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all outline-none"
+                  />
+                  <Search className="w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                </div>
+                
+                {NAV_LINKS.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className="block px-4 py-3 rounded-xl text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
               </div>
-              
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="block px-4 py-3 rounded-xl text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </header>
+    </div>
   );
 }

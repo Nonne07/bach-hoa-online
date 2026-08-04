@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { Star, Minus, Plus, ShoppingCart, Heart, Share2, ShieldCheck, Truck, RotateCcw, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import Image from "next/image";
@@ -67,26 +68,20 @@ export default function ProductDetailPage({
   ];
 
   const handleAddToCart = () => {
-    addToCart({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      quantity,
-      image: product.image,
-    });
+    addToCart(product, quantity);
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="pt-32 pb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen bg-slate-50">
       {/* Breadcrumb / Back button */}
-      <div className="mb-6">
-        <Link href="/shop" className="inline-flex items-center text-sm font-medium text-slate-500 hover:text-brand-600 transition-colors">
-          <ArrowLeft className="w-4 h-4 mr-1" /> Danh mục sản phẩm
+      <div className="mb-8">
+        <Link href="/shop" className="inline-flex items-center text-sm font-bold text-slate-500 hover:text-brand-600 transition-colors uppercase tracking-widest bg-white/50 backdrop-blur-md px-4 py-2 rounded-full border border-slate-200 shadow-sm">
+          <ArrowLeft className="w-4 h-4 mr-2" /> Quay lại cửa hàng
         </Link>
       </div>
 
-      <div className="bg-white rounded-3xl p-6 md:p-10 shadow-sm border border-slate-100 mb-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16">
+      <div className="bg-white/80 backdrop-blur-xl rounded-[3rem] p-8 md:p-12 shadow-2xl shadow-slate-200/50 border border-white mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
           {/* Product Images */}
           <div className="space-y-4">
             <div className="aspect-square bg-slate-50 rounded-2xl relative overflow-hidden group border border-slate-100">
@@ -187,13 +182,15 @@ export default function ProductDetailPage({
               </div>
 
               <div className="flex gap-4">
-                <Button
-                  onClick={handleAddToCart}
-                  size="lg"
-                  className="flex-1 rounded-xl text-lg shadow-lg shadow-brand-500/30"
-                >
-                  <ShoppingCart className="w-5 h-5 mr-2" /> Thêm vào giỏ hàng
-                </Button>
+                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="flex-1">
+                  <Button
+                    onClick={handleAddToCart}
+                    size="lg"
+                    className="w-full rounded-xl text-lg shadow-xl shadow-brand-500/30 bg-gradient-to-r from-brand-500 to-brand-400 border-none text-white transition-all hover:shadow-brand-500/50"
+                  >
+                    <ShoppingCart className="w-5 h-5 mr-2" /> Thêm vào giỏ hàng
+                  </Button>
+                </motion.div>
                 <Button variant="outline" size="lg" className="px-4 rounded-xl">
                   <Heart className="w-6 h-6" />
                 </Button>

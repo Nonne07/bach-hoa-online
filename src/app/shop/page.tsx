@@ -30,74 +30,86 @@ function ShopContent() {
   }, [searchQuery, categoryQuery]);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="flex flex-col md:flex-row gap-8">
-        {/* Sidebar Filters */}
-        <div className="w-full md:w-64 shrink-0 space-y-8">
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-              <Filter className="w-5 h-5 text-slate-900 dark:text-slate-100" />
-              <h2 className="font-bold text-lg text-slate-900 dark:text-slate-100">Lọc sản phẩm</h2>
-            </div>
-            
-            <div className="space-y-6">
-              <div>
-                <h3 className="font-semibold text-slate-800 dark:text-slate-200 mb-3">Danh mục</h3>
-                <div className="space-y-2">
-                  <label className="flex items-center gap-3 cursor-pointer">
-                    <input type="checkbox" className="rounded text-brand-500 focus:ring-brand-500 w-4 h-4" defaultChecked />
-                    <span className="text-slate-600 dark:text-slate-300">Tất cả</span>
-                  </label>
-                  {categories.map((cat) => (
-                    <label key={cat.id} className="flex items-center gap-3 cursor-pointer">
-                      <input type="checkbox" className="rounded text-brand-500 focus:ring-brand-500 w-4 h-4" />
-                      <span className="text-slate-600 dark:text-slate-300">{cat.name}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <h3 className="font-semibold text-slate-800 dark:text-slate-200 mb-3">Mức giá</h3>
-                <div className="space-y-2">
-                  {["Dưới 50.000đ", "50.000đ - 200.000đ", "200.000đ - 500.000đ", "Trên 500.000đ"].map((price) => (
-                    <label key={price} className="flex items-center gap-3 cursor-pointer">
-                      <input type="radio" name="price" className="text-brand-500 focus:ring-brand-500 w-4 h-4" />
-                      <span className="text-slate-600 dark:text-slate-300">{price}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
+    <div className="pt-32 pb-24 bg-slate-50 min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Premium Header */}
+        <div className="mb-12 bg-gradient-to-r from-emerald-900 to-teal-800 rounded-3xl p-10 md:p-16 flex flex-col items-center text-center shadow-2xl shadow-emerald-900/20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[url('/images/hero_banner_fresh.png')] opacity-10 bg-cover bg-center mix-blend-overlay"></div>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4 relative z-10 tracking-tight">Cửa Hàng Thực Phẩm Sạch</h1>
+          <p className="text-emerald-100/80 max-w-2xl text-lg relative z-10">Khám phá hàng ngàn sản phẩm hữu cơ tươi ngon được thu hoạch và bảo quản với tiêu chuẩn khắt khe nhất.</p>
         </div>
 
-        {/* Product Grid */}
-        <div className="flex-1">
-          <div className="flex items-center justify-between mb-6">
-            <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Tất cả sản phẩm</h1>
-            <select className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-2 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500">
-              <option>Mới nhất</option>
-              <option>Giá thấp đến cao</option>
-              <option>Giá cao đến thấp</option>
-              <option>Bán chạy nhất</option>
-            </select>
+        <div className="flex flex-col md:flex-row gap-10">
+          {/* Sidebar Filters */}
+          <div className="w-full md:w-72 shrink-0">
+            <div className="bg-white/80 backdrop-blur-xl border border-white/60 p-6 rounded-[2rem] shadow-xl shadow-slate-200/40 sticky top-28">
+              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+                <div className="bg-brand-100 p-2 rounded-xl text-brand-600">
+                  <Filter className="w-5 h-5" />
+                </div>
+                <h2 className="font-bold text-xl text-slate-900">Bộ lọc</h2>
+              </div>
+              
+              <div className="space-y-8">
+                <div>
+                  <h3 className="font-bold text-slate-800 mb-4 text-sm uppercase tracking-widest">Danh mục</h3>
+                  <div className="space-y-3">
+                    <label className="flex items-center gap-3 cursor-pointer group">
+                      <input type="checkbox" className="rounded-md border-slate-300 text-brand-500 focus:ring-brand-500 w-5 h-5 transition-colors cursor-pointer" defaultChecked />
+                      <span className="text-slate-600 group-hover:text-brand-600 font-medium transition-colors">Tất cả</span>
+                    </label>
+                    {categories.map((cat) => (
+                      <label key={cat.id} className="flex items-center gap-3 cursor-pointer group">
+                        <input type="checkbox" className="rounded-md border-slate-300 text-brand-500 focus:ring-brand-500 w-5 h-5 transition-colors cursor-pointer" />
+                        <span className="text-slate-600 group-hover:text-brand-600 font-medium transition-colors">{cat.name}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="font-bold text-slate-800 mb-4 text-sm uppercase tracking-widest">Mức giá</h3>
+                  <div className="space-y-3">
+                    {["Dưới 50.000đ", "50.000đ - 200.000đ", "200.000đ - 500.000đ", "Trên 500.000đ"].map((price) => (
+                      <label key={price} className="flex items-center gap-3 cursor-pointer group">
+                        <input type="radio" name="price" className="text-brand-500 focus:ring-brand-500 w-5 h-5 border-slate-300 cursor-pointer" />
+                        <span className="text-slate-600 group-hover:text-brand-600 font-medium transition-colors">{price}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {isLoading ? (
-            <div className="flex justify-center py-20"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-500"></div></div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {products.map((product) => (
-                <ProductCard key={product.id} {...product} />
-              ))}
+          {/* Product Grid */}
+          <div className="flex-1">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4 bg-white/50 backdrop-blur-sm p-4 rounded-2xl border border-slate-100/50">
+              <span className="text-slate-500 font-medium">Hiển thị <strong className="text-slate-900">{products.length}</strong> sản phẩm</span>
+              <select className="bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-slate-700 font-medium focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 shadow-sm transition-all cursor-pointer">
+                <option>Mới nhất</option>
+                <option>Giá thấp đến cao</option>
+                <option>Giá cao đến thấp</option>
+                <option>Bán chạy nhất</option>
+              </select>
             </div>
-          )}
-          
-          <div className="mt-12 flex justify-center">
-            <Button variant="outline" className="w-48">
-              Xem thêm
-            </Button>
+
+            {isLoading ? (
+              <div className="flex justify-center py-20"><div className="w-12 h-12 border-4 border-brand-200 border-t-brand-500 rounded-full animate-spin"></div></div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
+                {products.map((product) => (
+                  <ProductCard key={product.id} {...product} />
+                ))}
+              </div>
+            )}
+            
+            <div className="mt-16 flex justify-center">
+              <Button className="px-10 py-6 rounded-full bg-slate-900 text-white font-bold text-lg hover:bg-brand-600 transition-colors shadow-xl">
+                Tải thêm sản phẩm
+              </Button>
+            </div>
           </div>
         </div>
       </div>

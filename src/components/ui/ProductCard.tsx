@@ -79,7 +79,7 @@ export function ProductCard({ id, name, price, originalPrice, image, category }:
           
           <div className="absolute bottom-0 left-0 right-0 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 flex items-center">
              <Button 
-              className="w-full text-sm font-semibold py-2.5 h-auto rounded-xl"
+              className="w-full text-sm font-semibold py-2.5 h-auto rounded-xl shadow-lg shadow-brand-500/30 bg-gradient-to-r from-brand-500 to-brand-400 border-none text-white transition-all hover:shadow-brand-500/50 hover:-translate-y-0.5"
               onClick={handleAddToCart}
             >
               <ShoppingCart className="w-4 h-4 mr-2" /> Thêm vào giỏ

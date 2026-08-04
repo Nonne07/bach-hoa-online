@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json();
-    const { items, subtotal, shipping, total, paymentMethod } = body;
+    const { items, total, paymentMethod } = body;
 
     if (!items || items.length === 0) {
       return NextResponse.json({ error: "Cart is empty" }, { status: 400 });
@@ -23,7 +23,7 @@ export async function POST(req: Request) {
         total,
         status: paymentMethod === "COD" ? "PENDING" : "PAID",
         items: {
-          create: items.map((item: any) => ({
+          create: items.map((item: { id: string, quantity: number, price: number }) => ({
             productId: item.id,
             quantity: item.quantity,
             price: item.price
