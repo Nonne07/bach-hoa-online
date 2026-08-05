@@ -4,6 +4,7 @@ import React from "react";
 import { User, MapPin, Settings, LogOut, Package } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
+import { SignOutButton } from "@/components/ui/SignOutButton";
 
 export default function ProfilePage() {
   return (
@@ -32,15 +33,15 @@ export default function ProfilePage() {
               <Link href="/orders" className="flex items-center gap-4 px-5 py-4 rounded-2xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all font-medium">
                 <Package className="w-5 h-5" /> Quản lý đơn hàng
               </Link>
-              <Link href="/profile" className="flex items-center gap-4 px-5 py-4 rounded-2xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all font-medium">
+              <Link href="#" onClick={(e) => { e.preventDefault(); alert("Chức năng đang được cập nhật!"); }} className="flex items-center gap-4 px-5 py-4 rounded-2xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all font-medium">
                 <MapPin className="w-5 h-5" /> Sổ địa chỉ
               </Link>
-              <Link href="/profile" className="flex items-center gap-4 px-5 py-4 rounded-2xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all font-medium">
+              <Link href="#" onClick={(e) => { e.preventDefault(); alert("Chức năng đang được cập nhật!"); }} className="flex items-center gap-4 px-5 py-4 rounded-2xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all font-medium">
                 <Settings className="w-5 h-5" /> Cài đặt thông báo
               </Link>
-              <Link href="/login" className="flex items-center gap-4 px-5 py-4 rounded-2xl text-red-500 hover:bg-red-50 transition-all font-medium mt-6">
-                <LogOut className="w-5 h-5" /> Đăng xuất
-              </Link>
+              <div className="mt-6 px-2">
+                <SignOutButton />
+              </div>
             </nav>
           </div>
         </div>
@@ -59,23 +60,23 @@ export default function ProfilePage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="group">
                   <label className="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">Họ và tên</label>
-                  <input type="text" defaultValue="Nguyễn Văn A" className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-brand-500 transition-all group-hover:border-slate-300 shadow-sm" />
+                  <input type="text" defaultValue="Nguyễn Văn A" className="w-full px-5 py-4 text-slate-900 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-brand-500 transition-all group-hover:border-slate-300 shadow-sm" />
                 </div>
                 <div className="group">
                   <label className="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">Số điện thoại</label>
-                  <input type="tel" defaultValue="0901234567" className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-brand-500 transition-all group-hover:border-slate-300 shadow-sm" />
+                  <input type="tel" defaultValue="0901234567" className="w-full px-5 py-4 text-slate-900 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-brand-500 transition-all group-hover:border-slate-300 shadow-sm" />
                 </div>
                 <div className="col-span-full group">
                   <label className="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">Email</label>
-                  <input type="email" defaultValue="nguyenvana@example.com" className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-brand-500 transition-all group-hover:border-slate-300 shadow-sm" />
+                  <input type="email" defaultValue="nguyenvana@example.com" className="w-full px-5 py-4 text-slate-900 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-brand-500 transition-all group-hover:border-slate-300 shadow-sm" />
                 </div>
                 <div className="group">
                   <label className="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">Ngày sinh</label>
-                  <input type="date" defaultValue="1990-01-01" className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-brand-500 transition-all group-hover:border-slate-300 shadow-sm" />
+                  <input type="date" defaultValue="1990-01-01" className="w-full px-5 py-4 text-slate-900 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-brand-500 transition-all group-hover:border-slate-300 shadow-sm" />
                 </div>
                 <div className="group">
                   <label className="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">Giới tính</label>
-                  <select className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-brand-500 transition-all group-hover:border-slate-300 shadow-sm cursor-pointer">
+                  <select className="w-full px-5 py-4 text-slate-900 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-brand-500 transition-all group-hover:border-slate-300 shadow-sm cursor-pointer">
                     <option value="male">Nam</option>
                     <option value="female">Nữ</option>
                     <option value="other">Khác</option>

@@ -6,6 +6,7 @@ import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { SignOutButton } from "@/components/ui/SignOutButton";
+import { AlertButton } from "@/components/ui/AlertButton";
 
 export default async function OrdersPage() {
   const session = await auth();
@@ -104,9 +105,9 @@ export default async function OrdersPage() {
                             {new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(order.total)}
                           </div>
                         </div>
-                        <Button variant="outline" size="sm" className="hidden sm:flex rounded-xl font-bold border-slate-200 hover:bg-brand-50 hover:text-brand-600 hover:border-brand-200 transition-all">
+                        <AlertButton message="Tính năng xem chi tiết đơn hàng đang được cập nhật!" className="hidden sm:flex rounded-xl font-bold border-slate-200 hover:bg-brand-50 hover:text-brand-600 hover:border-brand-200 transition-all group">
                           Chi tiết <ExternalLink className="ml-2 w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                        </Button>
+                        </AlertButton>
                       </div>
                     </div>
                   </div>
