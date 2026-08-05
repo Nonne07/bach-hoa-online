@@ -46,7 +46,7 @@ export default async function AdminDashboardPage() {
               <div key={order.id} className="flex items-center justify-between p-4 border border-slate-100 rounded-xl hover:bg-slate-50">
                 <div className="flex flex-col">
                   <span className="font-bold text-slate-800">#{order.id.slice(-6).toUpperCase()}</span>
-                  <span className="text-xs text-slate-500">{order.user.name} • {order.items.reduce((a, b) => a + b.quantity, 0)} sản phẩm</span>
+                  <span className="text-xs text-slate-500">{order.user.name} • {order.items.reduce((a: number, b: any) => a + b.quantity, 0)} sản phẩm</span>
                 </div>
                 <div className="flex flex-col items-end">
                   <span className="font-bold text-brand-600">
