@@ -5,8 +5,8 @@ import Link from "next/link";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
-import { SignOutButton } from "@/components/ui/SignOutButton";
 import { AlertButton } from "@/components/ui/AlertButton";
+import { ProfileSidebar } from "@/components/layout/ProfileSidebar";
 
 export default async function OrdersPage() {
   const session = await auth();
@@ -28,37 +28,7 @@ export default async function OrdersPage() {
       
       <div className="flex flex-col md:flex-row gap-10 relative z-10">
         {/* Sidebar Navigation */}
-        <div className="w-full md:w-72 shrink-0">
-          <div className="bg-white/80 backdrop-blur-xl rounded-[2.5rem] p-6 shadow-xl shadow-slate-200/40 border border-white sticky top-28">
-            <div className="flex items-center gap-5 p-4 border-b border-slate-100 mb-4 pb-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-brand-400 to-brand-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-brand-500/30">
-                <span className="font-bold text-2xl">{session.user.name?.charAt(0) || <User className="w-8 h-8" />}</span>
-              </div>
-              <div>
-                <div className="font-extrabold text-xl text-slate-800">{session.user.name}</div>
-                <div className="text-sm font-bold text-brand-500 mt-1">Thành viên</div>
-              </div>
-            </div>
-            
-            <nav className="space-y-2">
-              <Link href="/profile" className="flex items-center gap-4 px-5 py-4 rounded-2xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all font-medium">
-                <User className="w-5 h-5" /> Thông tin tài khoản
-              </Link>
-              <Link href="/orders" className="flex items-center gap-4 px-5 py-4 rounded-2xl bg-brand-50 text-brand-600 font-bold shadow-inner">
-                <Package className="w-5 h-5" /> Quản lý đơn hàng
-              </Link>
-              <Link href="/profile" className="flex items-center gap-4 px-5 py-4 rounded-2xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all font-medium">
-                <MapPin className="w-5 h-5" /> Sổ địa chỉ
-              </Link>
-              <Link href="/profile" className="flex items-center gap-4 px-5 py-4 rounded-2xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all font-medium">
-                <Settings className="w-5 h-5" /> Cài đặt thông báo
-              </Link>
-              <div className="mt-6 px-2">
-                <SignOutButton />
-              </div>
-            </nav>
-          </div>
-        </div>
+        <ProfileSidebar userName={session?.user?.name} />
 
         {/* Main Content */}
         <div className="flex-1">
@@ -105,9 +75,11 @@ export default async function OrdersPage() {
                             {new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(order.total)}
                           </div>
                         </div>
-                        <AlertButton message="Tính năng xem chi tiết đơn hàng đang được cập nhật!" className="hidden sm:flex rounded-xl font-bold border-slate-200 hover:bg-brand-50 hover:text-brand-600 hover:border-brand-200 transition-all group">
-                          Chi tiết <ExternalLink className="ml-2 w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                        </AlertButton>
+                        <Link href={`/orders/${order.id}`}>
+                          <Button variant="outline" size="sm" className="hidden sm:flex rounded-xl font-bold border-slate-200 hover:bg-brand-50 hover:text-brand-600 hover:border-brand-200 transition-all group">
+                            Chi tiết <ExternalLink className="ml-2 w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                          </Button>
+                        </Link>
                       </div>
                     </div>
                   </div>

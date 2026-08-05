@@ -1,12 +1,13 @@
 "use client";
 
 import React from "react";
-import { User, MapPin, Settings, LogOut, Package } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import Link from "next/link";
-import { SignOutButton } from "@/components/ui/SignOutButton";
+import { Settings } from "lucide-react";
+import { useSession } from "next-auth/react";
+import { ProfileSidebar } from "@/components/layout/ProfileSidebar";
 
 export default function ProfilePage() {
+  const { data: session } = useSession();
+
   return (
     <div className="pt-32 pb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen bg-slate-50 relative overflow-hidden">
       {/* Background decorations */}
@@ -14,37 +15,7 @@ export default function ProfilePage() {
       
       <div className="flex flex-col md:flex-row gap-10 relative z-10">
         {/* Sidebar Navigation */}
-        <div className="w-full md:w-72 shrink-0">
-          <div className="bg-white/80 backdrop-blur-xl rounded-[2.5rem] p-6 shadow-xl shadow-slate-200/40 border border-white sticky top-28">
-            <div className="flex items-center gap-5 p-4 border-b border-slate-100 mb-4 pb-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-brand-400 to-brand-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-brand-500/30">
-                <User className="w-8 h-8" />
-              </div>
-              <div>
-                <div className="font-extrabold text-xl text-slate-800">Nguyễn Văn A</div>
-                <div className="text-sm font-bold text-brand-500 mt-1">Thành viên Bạc</div>
-              </div>
-            </div>
-            
-            <nav className="space-y-2">
-              <Link href="/profile" className="flex items-center gap-4 px-5 py-4 rounded-2xl bg-brand-50 text-brand-600 font-bold shadow-inner">
-                <User className="w-5 h-5" /> Thông tin tài khoản
-              </Link>
-              <Link href="/orders" className="flex items-center gap-4 px-5 py-4 rounded-2xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all font-medium">
-                <Package className="w-5 h-5" /> Quản lý đơn hàng
-              </Link>
-              <Link href="#" onClick={(e) => { e.preventDefault(); alert("Chức năng đang được cập nhật!"); }} className="flex items-center gap-4 px-5 py-4 rounded-2xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all font-medium">
-                <MapPin className="w-5 h-5" /> Sổ địa chỉ
-              </Link>
-              <Link href="#" onClick={(e) => { e.preventDefault(); alert("Chức năng đang được cập nhật!"); }} className="flex items-center gap-4 px-5 py-4 rounded-2xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all font-medium">
-                <Settings className="w-5 h-5" /> Cài đặt thông báo
-              </Link>
-              <div className="mt-6 px-2">
-                <SignOutButton />
-              </div>
-            </nav>
-          </div>
-        </div>
+        <ProfileSidebar userName={session?.user?.name} />
 
         {/* Main Content */}
         <div className="flex-1">
