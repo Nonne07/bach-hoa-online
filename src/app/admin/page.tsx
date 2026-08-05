@@ -3,12 +3,16 @@ import { TrendingUp, Users, ShoppingBag, DollarSign } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 
 export default async function AdminDashboardPage() {
-  const usersCount = 42;
-  const productsCount = 8;
-  const ordersCount = 15;
+  const usersCount = await prisma.user.count();
+  const productsCount = await prisma.product.count();
+  const ordersCount = await prisma.order.count();
   
   // Aggregate total revenue
-  const totalRevenue = 12500000;
+  const revenueResult = await prisma.order.aggregate({
+    _sum: { total: true },
+    where: { status: "PAID" }
+  });
+  const totalRevenue = revenueResult._sum.total || 0;
 
   const STATS = [
     { title: "Tổng doanh thu", value: new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(totalRevenue), icon: DollarSign, color: "text-brand-600 bg-brand-100" },
@@ -17,9 +21,16 @@ export default async function AdminDashboardPage() {
     { title: "Tổng sản phẩm", value: productsCount.toString(), icon: TrendingUp, color: "text-purple-600 bg-purple-100" },
   ];
 
-  const recentOrders: any[] = [];
+  const recentOrders = await prisma.order.findMany({
+    take: 5,
+    orderBy: { createdAt: "desc" },
+    include: { user: true, items: true }
+  });
 
-  const topProducts: any[] = [];
+  const topProducts = await prisma.product.findMany({
+    take: 5,
+    orderBy: { price: "desc" } // Ideally order by orderItem count, but for demo this is fine
+  });
 
   return (
     <div className="space-y-6">
@@ -46,7 +57,7 @@ export default async function AdminDashboardPage() {
               <div key={order.id} className="flex items-center justify-between p-4 border border-slate-100 rounded-xl hover:bg-slate-50">
                 <div className="flex flex-col">
                   <span className="font-bold text-slate-800">#{order.id.slice(-6).toUpperCase()}</span>
-                  <span className="text-xs text-slate-500">{order.user.name} • {order.items.reduce((a: number, b: any) => a + b.quantity, 0)} sản phẩm</span>
+                  <span className="text-xs text-slate-500">{order.user.name} • {order.items.reduce((a, b) => a + b.quantity, 0)} sản phẩm</span>
                 </div>
                 <div className="flex flex-col items-end">
                   <span className="font-bold text-brand-600">

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 import mockProducts from "@/data/mockProducts.json";
 
 export async function GET(
@@ -7,7 +8,9 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    const product = mockProducts.find(p => p.id === id);
+    const product = await prisma.product.findUnique({
+      where: { id },
+    });
 
     if (!product) {
       return NextResponse.json(

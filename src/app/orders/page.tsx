@@ -14,7 +14,11 @@ export default async function OrdersPage() {
     redirect("/login");
   }
 
-  const userOrders: any[] = [];
+  const userOrders = await prisma.order.findMany({
+    where: { userId: session.user.id },
+    orderBy: { createdAt: "desc" },
+    include: { items: true }
+  });
 
   return (
     <div className="pt-32 pb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen bg-slate-50 relative overflow-hidden">
@@ -72,7 +76,7 @@ export default async function OrdersPage() {
                   Bạn chưa có đơn hàng nào.
                 </div>
               ) : userOrders.map((order) => {
-                const itemsCount = order.items.reduce((acc: number, item: any) => acc + item.quantity, 0);
+                const itemsCount = order.items.reduce((acc, item) => acc + item.quantity, 0);
                 let color = "text-blue-600 bg-blue-50 border-blue-200";
                 if (order.status === "PAID") color = "text-brand-600 bg-brand-50 border-brand-200";
                 else if (order.status === "CANCELLED") color = "text-red-600 bg-red-50 border-red-200";

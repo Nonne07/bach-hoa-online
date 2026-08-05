@@ -16,8 +16,24 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Cart is empty" }, { status: 400 });
     }
 
-    // Create Order - Mocked for Vercel
-    const order = { id: "mock_order_" + Date.now() };
+    // Create Order
+    const order = await prisma.order.create({
+      data: {
+        userId: session.user.id,
+        total,
+        status: paymentMethod === "COD" ? "PENDING" : "PAID",
+        items: {
+          create: items.map((item: { id: string, quantity: number, price: number }) => ({
+            productId: item.id,
+            quantity: item.quantity,
+            price: item.price
+          }))
+        }
+      },
+      include: {
+        items: true
+      }
+    });
 
     return NextResponse.json({ success: true, orderId: order.id }, { status: 201 });
   } catch (error) {

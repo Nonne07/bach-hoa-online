@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 import mockProducts from "@/data/mockProducts.json";
 
 export async function GET(request: Request) {
@@ -7,15 +8,24 @@ export async function GET(request: Request) {
     const category = searchParams.get("category");
     const search = searchParams.get("search");
 
-    let filtered = mockProducts;
+    let products: any[] = [];
+    
+    const whereClause: { category?: string; name?: { contains: string, mode?: "insensitive" } } = {};
     if (category && category !== "all") {
-      filtered = filtered.filter(p => p.category === category);
+      whereClause.category = category;
     }
     if (search) {
-      filtered = filtered.filter(p => p.name.toLowerCase().includes(search.toLowerCase()));
+      whereClause.name = {
+        contains: search,
+        mode: "insensitive" // PostgreSQL supports insensitive search
+      };
     }
+    products = await prisma.product.findMany({
+      where: whereClause,
+      orderBy: { createdAt: "desc" },
+    });
 
-    return NextResponse.json(filtered);
+    return NextResponse.json(products);
   } catch (error) {
     console.error("Error fetching products:", error);
     return NextResponse.json(
