@@ -15,7 +15,13 @@ export default async function OrderDetailsPage({ params }: { params: { id: strin
 
   const order = await prisma.order.findUnique({
     where: { id: params.id, userId: session.user.id },
-    include: { items: true }
+    include: { 
+      items: {
+        include: {
+          product: true
+        }
+      } 
+    }
   });
 
   if (!order) {
@@ -99,10 +105,10 @@ export default async function OrderDetailsPage({ params }: { params: { id: strin
               <div key={item.id} className="flex items-center justify-between p-4 rounded-2xl border border-slate-100 hover:border-brand-200 transition-colors">
                 <div className="flex items-center gap-4">
                   <div className="w-16 h-16 bg-slate-100 rounded-xl relative overflow-hidden">
-                    {item.image && <Image src={item.image} alt={item.name} fill className="object-cover" />}
+                    {item.product.image && <Image src={item.product.image} alt={item.product.name} fill className="object-cover" />}
                   </div>
                   <div>
-                    <h3 className="font-bold text-slate-900">{item.name}</h3>
+                    <h3 className="font-bold text-slate-900">{item.product.name}</h3>
                     <div className="text-sm text-slate-500">Số lượng: <span className="font-semibold text-slate-700">{item.quantity}</span></div>
                   </div>
                 </div>
